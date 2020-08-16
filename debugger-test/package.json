@@ -1,0 +1,13 @@
+{
+  "name": "debugger-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=dev nodemon --inspect=9229 bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
