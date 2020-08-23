@@ -11,10 +11,9 @@ const sqlHandle = (sql) => {
   const promise = new Promise((resolve, reject) => {
     con.query(sql, (err, data) => {
       if (err) {
-        reject(err);
-        return;
+        return reject(err);
       }
-      resolve(data);
+      return resolve(data);
     });
   });
   return promise;

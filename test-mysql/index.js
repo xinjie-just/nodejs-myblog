@@ -13,9 +13,9 @@ const con = mysql.createConnection({
 con.connect();
 
 // 操作数据库
-const sql = 'select * from users';
+// const sql = 'select * from users';
 // const sql = 'select id, username from users';
-// const sql = `insert into users (username, password, realname) values ('wangwu', '123', '王五')`;
+const sql = `insert into users (username, password, realname) values ('geqi', '123', '葛七')`;
 // const sql = `update users set realname='王大五' where username='wangwu'`;
 // const sql = `update users set realname='王五', status='0' where username='wangwu'`;
 con.query(sql, (err, data) => {
@@ -23,7 +23,7 @@ con.query(sql, (err, data) => {
     console.log(err);
     return;
   }
-  console.table(data);
+  console.log(data);
 });
 
 // 关闭数据库
