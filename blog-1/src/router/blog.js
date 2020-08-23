@@ -1,8 +1,8 @@
 const { SuccessModel, ErrorModel } = require('../model/resModel');
 const {
-  getListData,
-  getDetailData,
-  newBlog,
+  getBlogList,
+  getBlogDetail,
+  createBlog,
   updateBlog,
   deleteBlog,
 } = require('../controller/blogData');
@@ -23,7 +23,7 @@ const handleBlogRouter = (req, res) => {
   if (method === 'GET' && req.url.includes('/api/blog/list')) {
     const author = req.query.author || '';
     const keyword = req.query.keyword || '';
-    const result = getListData(keyword, author);
+    const result = getBlogList(keyword, author); // 传参数顺序不要混淆
     if (req.query.isadmin) {
       // 管理员界面
       const loginCheckResult = loginCheck(req);
@@ -41,7 +41,7 @@ const handleBlogRouter = (req, res) => {
 
   // 博客详情
   if (method === 'GET' && req.url.includes('/api/blog/detail')) {
-    const result = getDetailData(id);
+    const result = getBlogDetail(id);
     return result.then((detailData) => {
       return new SuccessModel(detailData);
     });
@@ -55,7 +55,7 @@ const handleBlogRouter = (req, res) => {
       loginCheckResult;
     }
     req.body.author = req.session.username;
-    const result = newBlog(req.body);
+    const result = createBlog(req.body);
     return result.then((value) => {
       return new SuccessModel(value);
     });

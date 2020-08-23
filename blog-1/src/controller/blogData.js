@@ -1,6 +1,7 @@
 const { sqlHandle } = require('../db/mysql');
 
-const getListData = (keyword = '', author = '') => {
+// 获取博客列表
+const getBlogList = (keyword = '', author = '') => {
   let sql = `select * from blogs where 1=1 `;
   if (keyword) {
     sql += `and title like '%${keyword}%' `;
@@ -15,7 +16,8 @@ const getListData = (keyword = '', author = '') => {
   });
 };
 
-const getDetailData = (id) => {
+// 获取博客详情
+const getBlogDetail = (id) => {
   /* return {
     id: 2,
     title: '博客2',
@@ -29,8 +31,9 @@ const getDetailData = (id) => {
   });
 };
 
-const newBlog = (blogData = {}) => {
-  /* console.log('newBlog...', blogData);
+// 新建一个博客
+const createBlog = (blogData = {}) => {
+  /* console.log('createBlog...', blogData);
   return {
     id: 1,
   }; */
@@ -45,6 +48,7 @@ const newBlog = (blogData = {}) => {
   });
 };
 
+// 更新博客内容
 const updateBlog = (id, blogData = {}) => {
   /* console.log('updateBlog...', id, blogData);
   return true; */
@@ -69,6 +73,7 @@ const updateBlog = (id, blogData = {}) => {
   });
 };
 
+// 删除一条博客
 const deleteBlog = (id, author) => {
   /* console.log('deleteBlog...', id);
   return true; */
@@ -82,9 +87,9 @@ const deleteBlog = (id, author) => {
 };
 
 module.exports = {
-  getListData,
-  getDetailData,
-  newBlog,
+  getBlogList,
+  getBlogDetail,
+  createBlog,
   updateBlog,
   deleteBlog,
 };
