@@ -21,4 +21,5 @@ const sqlHandle = (sql) => {
 
 module.exports = {
   sqlHandle,
+  escape: mysql.escape,
 };

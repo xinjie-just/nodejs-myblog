@@ -21,7 +21,7 @@ const handleBlogRouter = (req, res) => {
 
   // 博客列表
   if (method === 'GET' && req.url.includes('/api/blog/list')) {
-    const author = req.query.author || '';
+    let author = req.query.author || '';
     const keyword = req.query.keyword || '';
     const result = getBlogList(keyword, author); // 传参数顺序不要混淆
     if (req.query.isadmin) {
@@ -63,6 +63,7 @@ const handleBlogRouter = (req, res) => {
 
   // 更新博客
   if (method === 'POST' && req.url.includes('/api/blog/update')) {
+    const loginCheckResult = loginCheck(req);
     if (loginCheckResult) {
       // 未登录
       loginCheckResult;
@@ -79,6 +80,7 @@ const handleBlogRouter = (req, res) => {
 
   // 删除一条博客
   if (method === 'POST' && req.url.includes('/api/blog/delete')) {
+    const loginCheckResult = loginCheck(req);
     if (loginCheckResult) {
       // 未登录
       loginCheckResult;

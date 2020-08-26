@@ -24,7 +24,7 @@ const handleUserRouter = (req, res) => {
           req.session.realname = value.realname;
           // 将 session 同步到 redis 中
           set(req.sessionId, req.session);
-          console.log('session...', value.username, value.realname);
+          // console.log('session...', value.username, value.realname);
           return new SuccessModel('登录成功！');
         } else {
           return new ErrorModel('用户名或密码错误！');

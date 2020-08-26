@@ -1,5 +1,6 @@
 const handleBlogRouter = require('./src/router/blog');
 const { get, set } = require('./src/db/redis');
+const { writeLogs } = require('./src/utils/log');
 const { handleUserRouter, getExpiresTime } = require('./src/router/user');
 const querystring = require('querystring');
 
@@ -28,6 +29,11 @@ const getPostData = (req) => {
 };
 
 const serverHandle = (req, res) => {
+  writeLogs(
+    `${req.method} -- ${req.url} -- ${
+      req.headers['user-agent']
+    } -- ${Date.now()}`
+  );
   res.setHeader('Content-type', 'application/json');
 
   /*
@@ -117,8 +123,8 @@ const serverHandle = (req, res) => {
       }
 
       res.writeHead(404, {
-        'Content-type': 'text/plain',
-      });
+        'Content-type': 'text/plain;charset=utf8',
+      }); // writeHead 方法只能在消息上调用一次，并且必须在 res.end() 前调用。
       res.end('404 not found');
     });
 };
