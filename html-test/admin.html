@@ -27,13 +27,13 @@
     </style>
   </head>
   <body>
-    <h1 style="border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+    <h1 style="border-bottom: 1px solid #ccc; padding-bottom: 10px">
       管理中心
     </h1>
     <p>
       <a href="/new.html">新建博客</a>
     </p>
-    <div style="margin-bottom: 10px;">
+    <div style="margin-bottom: 10px">
       <input id="text-keyword" />
       <button id="btn-search">搜索</button>
     </div>
@@ -129,10 +129,10 @@
         }
 
         if (confirm('确定删除？')) {
-          const url = '/api/blog/del?id=' + $target.attr('data-id');
+          const url = '/api/blog/delete?id=' + $target.attr('data-id');
           post(url).then((res) => {
             if (res.code !== 0) {
-              alert('操作错误');
+              alert('操作错误，请确认是自己的博客');
               return;
             }
             location.href = location.href;
