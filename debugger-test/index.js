@@ -4,13 +4,11 @@ console.log(300);
 console.log(400);
 console.log(500);
 console.log(600);
-console.log(700);
- */
+console.log(700); */
 
 const http = require('http');
 
 const server = http.createServer((req, res) => {
-  debugger;
   res.writeHead(200, { 'content-type': 'text/html' });
   res.end('<h1>Hello World!</h1>');
 });

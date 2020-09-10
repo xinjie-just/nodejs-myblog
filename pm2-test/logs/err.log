@@ -1,0 +1,29 @@
+2020-09-03 23:10:03: 错误日志 1599145803062
+2020-09-03 23:10:03: 错误日志 1599145803106
+2020-09-03 23:10:03: 错误日志 1599145803667
+2020-09-03 23:10:03: 错误日志 1599145803935
+2020-09-03 23:10:04: 错误日志 1599145804154
+2020-09-03 23:10:04: 错误日志 1599145804381
+2020-09-03 23:10:07: 错误日志 1599145807817
+2020-09-03 23:10:07: Error: 404 出错了！
+2020-09-03 23:10:07:     at Server.<anonymous> (/Volumes/F(project)/project/learn-nodejs-myblog/pm2-test/app.js:13:11)
+2020-09-03 23:10:07:     at Server.emit (events.js:315:20)
+2020-09-03 23:10:07:     at Server.<anonymous> (/Users/lixinjie/.nvm/versions/node/v13.12.0/lib/node_modules/pm2/node_modules/@pm2/io/build/main/metrics/httpMetrics.js:166:33)
+2020-09-03 23:10:07:     at parserOnIncoming (_http_server.js:789:12)
+2020-09-03 23:10:07:     at HTTPParser.parserOnHeadersComplete (_http_common.js:116:17)
+2020-09-03 23:10:10: 错误日志 1599145810298
+2020-09-03 23:10:10: Error: 404 出错了！
+2020-09-03 23:10:10:     at Server.<anonymous> (/Volumes/F(project)/project/learn-nodejs-myblog/pm2-test/app.js:13:11)
+2020-09-03 23:10:10:     at Server.emit (events.js:315:20)
+2020-09-03 23:10:10:     at Server.<anonymous> (/Users/lixinjie/.nvm/versions/node/v13.12.0/lib/node_modules/pm2/node_modules/@pm2/io/build/main/metrics/httpMetrics.js:166:33)
+2020-09-03 23:10:10:     at parserOnIncoming (_http_server.js:789:12)
+2020-09-03 23:10:10:     at HTTPParser.parserOnHeadersComplete (_http_common.js:116:17)
+2020-09-03 23:10:10: 错误日志 1599145810670
+2020-09-03 23:10:10: Error: 404 出错了！
+2020-09-03 23:10:10:     at Server.<anonymous> (/Volumes/F(project)/project/learn-nodejs-myblog/pm2-test/app.js:13:11)
+2020-09-03 23:10:10:     at Server.emit (events.js:315:20)
+2020-09-03 23:10:10:     at Server.<anonymous> (/Users/lixinjie/.nvm/versions/node/v13.12.0/lib/node_modules/pm2/node_modules/@pm2/io/build/main/metrics/httpMetrics.js:166:33)
+2020-09-03 23:10:10:     at parserOnIncoming (_http_server.js:789:12)
+2020-09-03 23:10:10:     at HTTPParser.parserOnHeadersComplete (_http_common.js:116:17)
+2020-09-03 23:10:14: 错误日志 1599145814127
+2020-09-03 23:12:28: 错误日志 1599145948229
