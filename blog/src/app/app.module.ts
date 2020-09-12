@@ -14,11 +14,12 @@ import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { SHARED_ZORRO_MODULES } from './shared/shared-zorro.module';
+import { UserComponent } from './component/user/user.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,6 +29,7 @@ registerLocaleData(zh);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ...SHARED_ZORRO_MODULES,
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],

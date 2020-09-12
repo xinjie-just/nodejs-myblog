@@ -29,20 +29,23 @@
   </nz-sider>
   <nz-layout>
     <nz-header>
-      <div class="app-header">
-        <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+      <div nz-row class="app-header" nzJustify="space-between">
+        <span
+          class="header-trigger"
+          (click)="isCollapsed = !isCollapsed"
+          [title]="isCollapsed ? '展开菜单' : '折叠菜单'"
+        >
           <i
             class="trigger"
             nz-icon
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></i>
         </span>
+        <app-user></app-user>
       </div>
     </nz-header>
     <nz-content>
-      <div class="inner-content">
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet></router-outlet>
     </nz-content>
   </nz-layout>
 </nz-layout>

@@ -1,15 +1,46 @@
-<div style="background: #ececec; padding: 30px">
-  <nz-card
-    style="width: 300px"
-    [nzBordered]="false"
-    nzTitle="Card title"
-    [nzExtra]="extraTemplate"
-  >
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
-  </nz-card>
-</div>
-<ng-template #extraTemplate>
-  <a>More</a>
-</ng-template>
+<nz-card [nzTitle]="'博客列表'">
+  <div nz-row class="handle" nzJustify="space-between">
+    <div nz-col nzSpan="12">
+      <input
+        nz-input
+        placeholder="请输入博客标题关键词"
+        [(ngModel)]="value"
+        nz-col
+        nzSpan="10"
+        (keyup.enter)="search()"
+      />
+      <button nz-button nzType="primary" nz-col nzOffset="1" (click)="search()">
+        查询
+      </button>
+    </div>
+    <div nz-col>
+      <button nz-button nzType="primary">新建博客</button>
+    </div>
+  </div>
+  <nz-table #basicTable [nzData]="blogList">
+    <thead>
+      <tr>
+        <th>序号</th>
+        <th>博客标题</th>
+        <th>作者</th>
+        <th>创建时间</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let blog of basicTable.data; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ blog.title }}</td>
+        <td>{{ blog.author }}</td>
+        <td>{{ blog.createtime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
+        <td>
+          <a>查看</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteBlog(blog)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</nz-card>
