@@ -1,1 +1,25 @@
-<a nz-button nzType="link">登录</a>
+<div class="user-info">
+  <a
+    nz-button
+    nzType="link"
+    *ngIf="loginStatus === 0"
+    [nzSize]="'large'"
+    (click)="login()"
+    >登录</a
+  >
+
+  <a
+    nz-dropdown
+    nzTrigger="click"
+    [nzDropdownMenu]="menu"
+    *ngIf="loginStatus === 1"
+  >
+    {{ author }}
+    <i nz-icon nzType="down"></i>
+  </a>
+  <nz-dropdown-menu #menu="nzDropdownMenu">
+    <ul nz-menu>
+      <li nz-menu-item (click)="logout()">退出</li>
+    </ul>
+  </nz-dropdown-menu>
+</div>

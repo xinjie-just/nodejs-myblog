@@ -1,0 +1,8 @@
+<nz-card nzTitle="{{ blog.title }}">
+  <div class="ext-info">
+    <span>{{ blog.author }}</span>
+    <span>{{ blog.createtime | date: "yyyy-MM-dd HH-mm-ss" }}</span>
+  </div>
+  <nz-divider></nz-divider>
+  <p>{{ blog.content }}</p>
+</nz-card>

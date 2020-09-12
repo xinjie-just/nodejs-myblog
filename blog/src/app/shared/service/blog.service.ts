@@ -19,6 +19,10 @@ export class BlogService {
   }
 
   deleteBlog(params: DeleteBlogRequestParams): Observable<any> {
-    return this.http.post(`/api/blog/delete/id=${params.id}`, {});
+    return this.http.post(`/api/blog/delete?id=${params.id}`, {});
+  }
+
+  getBlogInfo(id: number): Observable<any> {
+    return this.http.get(`/api/blog/detail?id=${id}`);
   }
 }

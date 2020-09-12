@@ -13,6 +13,9 @@
         查询
       </button>
     </div>
+    <div nz-col>
+      <button nz-button nzType="primary">新建博客</button>
+    </div>
   </div>
   <nz-table #basicTable [nzData]="blogList">
     <thead>
@@ -32,6 +35,10 @@
         <td>{{ blog.createtime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
         <td>
           <a (click)="view(blog.id)">查看</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>编辑</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="deleteBlog(blog)">删除</a>
         </td>
       </tr>
     </tbody>

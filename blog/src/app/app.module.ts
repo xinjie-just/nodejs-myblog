@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -15,11 +15,13 @@ import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 import { SHARED_ZORRO_MODULES } from './shared/shared-zorro.module';
 import { UserComponent } from './component/user/user.component';
+import { ListComponent } from './pages/blog/list/list.component';
+import { DetailsComponent } from './pages/blog/details/details.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, UserComponent],
+  declarations: [AppComponent, UserComponent, ListComponent, DetailsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -27,6 +29,7 @@ registerLocaleData(zh);
     NzLayoutModule,
     NzMenuModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     ...SHARED_ZORRO_MODULES,

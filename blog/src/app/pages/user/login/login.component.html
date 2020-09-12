@@ -1,0 +1,59 @@
+<form
+  nz-form
+  [formGroup]="validateForm"
+  class="login-form"
+  (ngSubmit)="submitForm()"
+>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" required>用户名</nz-form-label>
+    <nz-form-control nzSpan="14" [nzErrorTip]="'用户名是必填项'">
+      <nz-input-group nzPrefixIcon="user">
+        <input
+          type="text"
+          nz-input
+          formControlName="userName"
+          placeholder="Username"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" required>密码</nz-form-label>
+    <nz-form-control nzSpan="14" [nzErrorTip]="'密码是必填项'">
+      <nz-input-group nzPrefixIcon="lock">
+        <input
+          type="password"
+          nz-input
+          formControlName="password"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <button
+      nz-col
+      nzOffset="4"
+      nz-button
+      class="login-form-button login-form-margin"
+      [nzType]="'primary'"
+      type="submit"
+      [disabled]="validateForm.invalid"
+      [nzLoading]="loading"
+    >
+      登录
+    </button>
+    <button
+      nz-col
+      nzOffset="1"
+      nz-button
+      class="login-form-button login-form-margin"
+      [nzType]="'default'"
+      type="button"
+      (click)="cancel()"
+      [nzLoading]="loading"
+    >
+      取消
+    </button>
+  </nz-form-item>
+</form>

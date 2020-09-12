@@ -7,9 +7,7 @@ import {
   SearchBlogRequestParams,
 } from 'src/app/shared/interface/blog';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { resolveCname } from 'dns';
-import { NzMenuModeType } from 'ng-zorro-antd/menu';
-import { NzModalService } from 'ng-zorro-antd/modal';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -25,7 +23,7 @@ export class IndexComponent implements OnInit {
   constructor(
     private blogService: BlogService,
     private msg: NzMessageService,
-    private modal: NzModalService
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -58,30 +56,11 @@ export class IndexComponent implements OnInit {
       }
     );
   }
-
-  deleteBlog(blog: Blog) {
-    const deleteMadel = this.modal.confirm({
-      nzTitle: `你确认要删除博客 <i>${blog.title}</i> 吗？`,
-      nzOnOk: () => this.delete(blog),
-    });
+  toBlogList(blog: Blog) {
+    this.router.navigateByUrl(`/blog/list?author=${blog.author}`);
   }
-  delete(blog: Blog) {
-    const params: DeleteBlogRequestParams = {
-      id: blog.id,
-      author: blog.author,
-    };
-    this.blogService.deleteBlog(params).subscribe(
-      (res: CommonResponse<{}>) => {
-        if (res.code === 0) {
-          this.msg.success(res.message);
-          this.getBlogList();
-        } else {
-          this.msg.error(res.message);
-        }
-      },
-      (error) => {
-        this.msg.error(error);
-      }
-    );
+
+  view(id: number) {
+    this.router.navigateByUrl(`/blog/details/${id}`);
   }
 }

@@ -8,6 +8,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/index/index.module').then((m) => m.IndexModule),
   },
+  {
+    path: 'user',
+    loadChildren: () =>
+      import('./pages/user/user.module').then((m) => m.UserModule),
+  },
+  {
+    path: 'blog',
+    loadChildren: () =>
+      import('./pages/blog/blog.module').then((m) => m.BlogModule),
+  },
 ];
 
 @NgModule({
