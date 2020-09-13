@@ -34,7 +34,7 @@ const getBlogList = async (keyword = '', author = '', pageIndex, pageSize) => {
 const getBlogDetail = async (id) => {
   const sql = `select * from blogs where id=${id}`;
   const row = await sqlHandle(sql);
-  return row[0];
+  return { results: row[0] };
 };
 
 // 新建一个博客
@@ -45,7 +45,7 @@ const createBlog = async (blogData = {}) => {
   const createtime = Date.now();
   const sql = `insert into blogs (title, content, author, createtime) values ('${title}', '${content}', '${author}', ${createtime})`;
   const data = await sqlHandle(sql);
-  return data.insertId;
+  return { results: data.insertId };
 };
 
 // 更新博客内容
@@ -66,7 +66,7 @@ const updateBlog = async (id, blogData = {}) => {
   }
   sql += ` where id=${id}`;
   const data = await sqlHandle(sql);
-  return data.affectedRows !== 0 ? true : false;
+  return { results: data.affectedRows !== 0 ? true : false };
 };
 
 // 删除一条博客
@@ -75,7 +75,7 @@ const deleteBlog = async (id, author) => {
   // const sql = `update blogs set status = 0 where id = ${id} and author='${author}'`;
   const sql = `delete from blogs where id = ${id} and author='${author}'`;
   const data = await sqlHandle(sql);
-  return data.affectedRows !== 0 ? true : false;
+  return { results: data.affectedRows !== 0 ? true : false };
 };
 
 module.exports = {

@@ -39,7 +39,11 @@ router.post('/new', loginCheck, async (ctx, next) => {
     ctx.request.body.author = req.session.username;
   }
   const value = await createBlog(ctx.request.body);
-  ctx.body = new SuccessModel(value);
+  if (value) {
+    ctx.body = new SuccessModel('博客创建成功！');
+  } else {
+    ctx.body = new ErrorModel('博客创建失败！');
+  }
 });
 
 router.post('/update', loginCheck, async (ctx, next) => {

@@ -28,7 +28,7 @@ router.get('/list', (req, res, next) => {
   return result.then((listData) => {
     res.json(new SuccessModel(listData));
   });
-};);
+});
 
 router.get('/detail', (req, res, next) => {
   const result = getBlogDetail(req.query.id);
@@ -43,7 +43,11 @@ router.post('/new', loginCheck, (req, res, next) => {
   }
   const result = createBlog(req.body);
   return result.then((value) => {
-    res.json(new SuccessModel(value));
+    if (value) {
+      res.json(new SuccessModel('博客创建成功！'));
+    } else {
+      res.json(new ErrorModel('博客创建失败！'));
+    }
   });
 });
 

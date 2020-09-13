@@ -9,7 +9,7 @@ const login = async (username, password) => {
   const sql = `select username, realname from users where username=${username} and password=${password}`;
   // console.log('sql is', sql);
   const row = await sqlHandle(sql);
-  return row[0];
+  return { results: row[0] };
 };
 
 module.exports = { login };
