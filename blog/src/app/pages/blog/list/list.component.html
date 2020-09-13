@@ -1,14 +1,26 @@
 <nz-card [nzTitle]="'博客列表'">
   <div nz-row class="handle" nzJustify="space-between">
     <div nz-col nzSpan="12">
-      <input
-        nz-input
-        placeholder="请输入博客标题关键词"
-        [(ngModel)]="value"
-        nz-col
-        nzSpan="10"
-        (keyup.enter)="search()"
-      />
+      <nz-input-group nz-col nzSpan="10" [nzSuffix]="suffixTemplate">
+        <input
+          nz-input
+          placeholder="请输入博客标题关键词"
+          [(ngModel)]="value"
+          (keyup.enter)="search()"
+        />
+      </nz-input-group>
+      <ng-template #suffixTemplate
+        ><i
+          nz-icon
+          nz-tooltip
+          class="ant-input-clear-icon"
+          nzTheme="fill"
+          nzType="close-circle"
+          *ngIf="value"
+          (click)="value = ''"
+          title="清空"
+        ></i
+      ></ng-template>
       <button nz-button nzType="primary" nz-col nzOffset="1" (click)="search()">
         查询
       </button>

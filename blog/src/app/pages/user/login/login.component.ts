@@ -15,6 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 export class LoginComponent implements OnInit {
   validateForm: FormGroup;
   loading = false;
+  passwordVisible = true;
 
   constructor(
     private fb: FormBuilder,

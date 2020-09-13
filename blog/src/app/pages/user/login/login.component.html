@@ -20,15 +20,22 @@
   <nz-form-item>
     <nz-form-label nzSpan="4" required>密码</nz-form-label>
     <nz-form-control nzSpan="14" [nzErrorTip]="'密码是必填项'">
-      <nz-input-group nzPrefixIcon="lock">
+      <nz-input-group nzPrefixIcon="lock" [nzSuffix]="suffixTemplate">
         <input
-          type="password"
+          [type]="passwordVisible ? 'password' : 'text'"
           nz-input
           formControlName="password"
           placeholder="Password"
         />
       </nz-input-group>
     </nz-form-control>
+    <ng-template #suffixTemplate>
+      <i
+        nz-icon
+        [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+        (click)="passwordVisible = !passwordVisible"
+      ></i>
+    </ng-template>
   </nz-form-item>
   <nz-form-item>
     <button
