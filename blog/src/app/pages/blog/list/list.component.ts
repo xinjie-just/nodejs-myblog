@@ -9,8 +9,7 @@ import { BlogService } from 'src/app/shared/service/blog.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CommonResponse } from 'src/app/shared/interface/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -20,6 +19,9 @@ import { switchMap } from 'rxjs/operators';
 export class ListComponent implements OnInit {
   value = '';
   author = '';
+  total = 0;
+  pageIndex = 1;
+  pageSize = 10;
 
   tableLoading = false;
   blogList: Blog[] = [];
@@ -29,39 +31,39 @@ export class ListComponent implements OnInit {
     private blogService: BlogService,
     private msg: NzMessageService,
     private modal: NzModalService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
 
   ngOnInit() {
     this.author = localStorage.getItem('author');
-    /* this.route.queryParams.subscribe((value) => {
-      if (value.author !== this.author) {
-        this.allowHandle = false;
-      }
-    }); */
-    this.getBlogList({ title: '' });
+    this.getBlogList();
   }
 
   search() {
-    this.getBlogList({ title: this.value });
+    this.pageIndex = 1;
+    this.pageSize = 10;
+    this.getBlogList();
   }
 
-  getBlogList(value?: SearchBlogRequestParams) {
+  getBlogList() {
     this.tableLoading = true;
     const params: SearchBlogRequestParams = {
-      title: value.title,
+      title: this.value,
+      pageIndex: this.pageIndex - 1,
+      pageSize: this.pageSize,
+      author: this.author,
     };
-    params.author = this.author;
     this.blogService.getBlogList(params).subscribe(
       (res: CommonResponse<Blog[]>) => {
         if (res.code === 0) {
-          this.blogList = res.data;
+          this.total = res.data.total;
+          this.blogList = res.data.results;
         } else {
           this.msg.error(res.message);
         }
       },
       (error) => {
+        this.tableLoading = false;
         this.msg.error(error);
       },
       () => {
@@ -71,7 +73,7 @@ export class ListComponent implements OnInit {
   }
 
   deleteBlog(blog: Blog) {
-    const deleteMadel = this.modal.confirm({
+    this.modal.confirm({
       nzTitle: `你确认要删除博客 <i>${blog.title}</i> 吗？`,
       nzOnOk: () => this.delete(blog),
     });
@@ -85,7 +87,7 @@ export class ListComponent implements OnInit {
       (res: CommonResponse<{}>) => {
         if (res.code === 0) {
           this.msg.success(res.message);
-          this.getBlogList({ title: this.value });
+          this.search();
         } else {
           this.msg.error(res.message);
         }
@@ -112,7 +114,7 @@ export class ListComponent implements OnInit {
 
     handleModal.afterClose.subscribe((result) => {
       if (result && result.data === 'success') {
-        this.getBlogList({ title: this.value });
+        this.search();
       }
     });
   }

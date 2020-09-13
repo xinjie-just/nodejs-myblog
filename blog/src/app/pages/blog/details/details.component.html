@@ -1,8 +1,12 @@
-<nz-card nzTitle="{{ blog.title }}" [nzExtra]="extraTemplate">
-  <div class="ext-info">
-    <span>{{ blog.author }}</span>
-    <span>{{ blog.createtime | date: "yyyy-MM-dd HH-mm-ss" }}</span>
-  </div>
+<nz-card [nzTitle]="'博客详情'" [nzExtra]="extraTemplate">
+  <nz-descriptions nzTitle="{{ blog.title }}">
+    <nz-descriptions-item nzTitle="作者">{{
+      blog.author
+    }}</nz-descriptions-item>
+    <nz-descriptions-item nzTitle="创建时间">{{
+      blog.createtime | date: "yyyy-MM-dd HH-mm-ss"
+    }}</nz-descriptions-item>
+  </nz-descriptions>
   <nz-divider></nz-divider>
   <p>{{ blog.content }}</p>
 </nz-card>

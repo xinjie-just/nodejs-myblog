@@ -23,7 +23,9 @@ const handleBlogRouter = (req, res) => {
   if (method === 'GET' && req.url.includes('/api/blog/list')) {
     let author = req.query.author || '';
     const keyword = req.query.keyword || '';
-    const result = getBlogList(keyword, author); // 传参数顺序不要混淆
+    const pageIndex = req.query.pageIndex || 0;
+    const pageSize = req.query.pageSize || 10;
+    const result = getBlogList(keyword, author, pageIndex, pageSize); // 传参数顺序不要混淆
     if (req.query.isadmin) {
       // 管理员界面
       const loginCheckResult = loginCheck(req);
@@ -59,7 +61,11 @@ const handleBlogRouter = (req, res) => {
     }
     const result = createBlog(req.body);
     return result.then((value) => {
-      return new SuccessModel(value);
+      if (value) {
+        return new SuccessModel('博客创建成功！');
+      } else {
+        return new ErrorModel('博客创建失败！');
+      }
     });
   }
 

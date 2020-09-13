@@ -1,4 +1,4 @@
-<nz-card [nzTitle]="'博客列表'">
+<nz-card>
   <div nz-row class="handle" nzJustify="space-between">
     <div nz-col nzSpan="12">
       <input
@@ -14,14 +14,29 @@
       </button>
     </div>
   </div>
-  <nz-table #basicTable [nzData]="blogList">
+  <!-- <nz-table #basicTable [nzData]="blogList"> -->
+  <nz-table
+    #basicTable
+    [nzData]="blogList"
+    [nzSize]="'middle'"
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [nzShowTotal]="totalTemplate"
+    [nzShowQuickJumper]="true"
+    [nzShowSizeChanger]="true"
+    [nzLoading]="tableLoading"
+    [nzLoadingDelay]="2"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    (nzPageIndexChange)="getBlogList()"
+    (nzPageSizeChange)="getBlogList()"
+  >
     <thead>
       <tr>
         <th>序号</th>
         <th>博客标题</th>
         <th>作者</th>
         <th>创建时间</th>
-        <th>操作</th>
       </tr>
     </thead>
     <tbody>
@@ -30,10 +45,8 @@
         <td>{{ blog.title }}</td>
         <td>{{ blog.author }}</td>
         <td>{{ blog.createtime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
-        <td>
-          <a (click)="view(blog.id)">查看</a>
-        </td>
       </tr>
     </tbody>
   </nz-table>
+  <ng-template #totalTemplate let-total>共 {{ total }} 条</ng-template>
 </nz-card>

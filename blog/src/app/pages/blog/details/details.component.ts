@@ -22,11 +22,18 @@ export class DetailsComponent implements OnInit {
 
   ngOnInit(): void {
     const id = +this.route.snapshot.params.id;
-    this.blogService.getBlogInfo(id).subscribe((res: CommonResponse<Blog>) => {
-      if (res.code === 0) {
-        this.blog = res.data;
+    this.blogService.getBlogInfo(id).subscribe(
+      (res: CommonResponse<Blog>) => {
+        if (res.code === 0) {
+          this.blog = res.data.results;
+        } else {
+          this.msg.error(res.message);
+        }
+      },
+      (error) => {
+        this.msg.error(error);
       }
-    });
+    );
   }
 
   goListPage() {

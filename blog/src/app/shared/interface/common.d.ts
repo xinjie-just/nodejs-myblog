@@ -1,5 +1,5 @@
 export interface CommonResponse<T> {
   code: number;
   message: string;
-  data: T;
+  data: { results: T; total?: number };
 }

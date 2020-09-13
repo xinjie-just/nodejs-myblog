@@ -1,51 +1,64 @@
 <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="256px"
-    nzBreakpoint="md"
-    [(nzCollapsed)]="isCollapsed"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a routerLink="/index" target="_blank">
-        <img src="../assets/images/logo.jpeg" alt="logo" />
-      </a>
-    </div>
-    <ul
-      nz-menu
-      nzTheme="dark"
-      nzMode="inline"
-      [nzInlineCollapsed]="isCollapsed"
+  <ng-container *ngIf="templateType === 'sidebar'">
+    <nz-sider
+      class="menu-sidebar"
+      nzCollapsible
+      nzWidth="256px"
+      nzBreakpoint="md"
+      [(nzCollapsed)]="isCollapsed"
+      [nzTrigger]="null"
     >
-      <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/index">博客管理</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nz-sider>
-  <nz-layout>
+      <div class="sidebar-logo">
+        <a routerLink="/index" target="_blank">
+          <img src="../assets/images/logo.jpeg" alt="logo" />
+        </a>
+      </div>
+      <ul
+        nz-menu
+        nzTheme="dark"
+        nzMode="inline"
+        [nzInlineCollapsed]="isCollapsed"
+      >
+        <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/blog/list">博客管理</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout>
+      <nz-header>
+        <div nz-row class="app-header" nzJustify="space-between">
+          <span
+            class="header-trigger"
+            (click)="isCollapsed = !isCollapsed"
+            [title]="isCollapsed ? '展开菜单' : '折叠菜单'"
+          >
+            <i
+              class="trigger"
+              nz-icon
+              [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+            ></i>
+          </span>
+          <app-user></app-user>
+        </div>
+      </nz-header>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </ng-container>
+  <ng-container *ngIf="templateType === 'blank'">
     <nz-header>
       <div nz-row class="app-header" nzJustify="space-between">
-        <span
-          class="header-trigger"
-          (click)="isCollapsed = !isCollapsed"
-          [title]="isCollapsed ? '展开菜单' : '折叠菜单'"
-        >
-          <i
-            class="trigger"
-            nz-icon
-            [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-          ></i>
-        </span>
+        <h1 class="blog-title">博客首页</h1>
         <app-user></app-user>
       </div>
     </nz-header>
     <nz-content>
       <router-outlet></router-outlet>
     </nz-content>
-  </nz-layout>
+  </ng-container>
 </nz-layout>

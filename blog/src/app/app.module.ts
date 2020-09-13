@@ -13,16 +13,13 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { zh_CN } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-import { SHARED_ZORRO_MODULES } from './shared/shared-zorro.module';
 import { UserComponent } from './component/user/user.component';
-import { ListComponent } from './pages/blog/list/list.component';
-import { DetailsComponent } from './pages/blog/details/details.component';
-import { AddUpdateComponent } from './pages/blog/add-update/add-update.component';
+import { SHARED_ZORRO_MODULES } from './shared/shared-zorro.module';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, ListComponent, DetailsComponent, AddUpdateComponent],
+  declarations: [AppComponent, UserComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,7 +30,7 @@ registerLocaleData(zh);
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ...SHARED_ZORRO_MODULES,
+    ...SHARED_ZORRO_MODULES, // todo: 将 UserComponent 剥离出 app.module
   ],
   providers: [{ provide: NZ_I18N, useValue: zh_CN }],
   bootstrap: [AppComponent],

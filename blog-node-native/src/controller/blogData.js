@@ -2,7 +2,9 @@ const xss = require('xss');
 const { sqlHandle } = require('../db/mysql');
 
 // 获取博客列表
-const getBlogList = (keyword = '', author = '') => {
+const getBlogList = (keyword = '', author = '', pageIndex, pageSize) => {
+  let totalSql = ``;
+  let total = 0;
   let sql = `select * from blogs where 1=1 `;
   if (keyword) {
     sql += `and title like '%${keyword}%' `;
@@ -10,18 +12,31 @@ const getBlogList = (keyword = '', author = '') => {
   if (author) {
     sql += `and author = '${author}' `;
   }
-  sql += `order by createtime desc`;
-  /* return sqlHandle(sql).then((data) => {
-    return data;
-  }); */
-  return sqlHandle(sql);
+  sql += `order by createtime desc `;
+  totalSql = sql;
+  sqlHandle(totalSql).then((data) => {
+    total = data.length;
+  });
+
+  if (pageIndex && pageSize) {
+    const index = pageIndex * pageSize;
+    sql += `limit ${index}, ${pageSize}`;
+  }
+  return sqlHandle(sql).then((data) => {
+    return {
+      total,
+      results: data,
+    };
+  });
 };
 
 // 获取博客详情
 const getBlogDetail = (id) => {
   const sql = `select * from blogs where id=${id}`;
   return sqlHandle(sql).then((row) => {
-    return row[0];
+    return {
+      results: row[0],
+    };
   });
 };
 
@@ -33,7 +48,9 @@ const createBlog = (blogData = {}) => {
   const createtime = Date.now();
   const sql = `insert into blogs (title, content, author, createtime) values ('${title}', '${content}', '${author}', ${createtime})`;
   return sqlHandle(sql).then((data) => {
-    return data.insertId;
+    return {
+      results: data.insertId,
+    };
   });
 };
 
@@ -55,7 +72,9 @@ const updateBlog = (id, blogData = {}) => {
   }
   sql += ` where id=${id}`;
   return sqlHandle(sql).then((data) => {
-    return data.affectedRows !== 0 ? true : false;
+    return {
+      results: data.affectedRows !== 0 ? true : false,
+    };
   });
 };
 
@@ -65,7 +84,9 @@ const deleteBlog = (id, author) => {
   // const sql = `update blogs set status = 0 where id = ${id} and author='${author}'`;
   const sql = `delete from blogs where id = ${id} and author='${author}'`;
   return sqlHandle(sql).then((data) => {
-    return data.affectedRows !== 0 ? true : false;
+    return {
+      results: data.affectedRows !== 0 ? true : false,
+    };
   });
 };
 

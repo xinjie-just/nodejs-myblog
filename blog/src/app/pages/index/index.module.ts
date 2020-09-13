@@ -6,7 +6,7 @@ import { IndexComponent } from './index.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
-  imports: [IndexRoutingModule, SharedModule],
+  imports: [SharedModule, IndexRoutingModule],
   declarations: [IndexComponent],
   exports: [IndexComponent],
 })

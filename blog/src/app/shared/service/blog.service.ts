@@ -15,7 +15,7 @@ export class BlogService {
 
   getBlogList(params?: SearchBlogRequestParams): Observable<any> {
     return this.http.get(
-      `/api/blog/list?keyword=${params.title}&author=${params.author}`
+      `/api/blog/list?keyword=${params.title}&author=${params.author}&pageIndex=${params.pageIndex}&pageSize=${params.pageSize}`
     );
   }
 

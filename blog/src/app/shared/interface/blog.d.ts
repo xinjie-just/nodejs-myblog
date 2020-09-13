@@ -17,6 +17,8 @@ export interface AddUpdateBlogRequestParams {
 export interface SearchBlogRequestParams {
   author?: string;
   title?: string;
+  pageIndex?: number;
+  pageSize?: number;
 }
 
 export interface DeleteBlogRequestParams {

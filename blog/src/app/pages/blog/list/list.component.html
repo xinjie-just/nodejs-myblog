@@ -31,7 +31,23 @@
       </button>
     </div>
   </div>
-  <nz-table #basicTable [nzData]="blogList">
+  <!-- <nz-table #blogTable [nzData]="blogList"> -->
+  <nz-table
+    #blogTable
+    [nzData]="blogList"
+    [nzSize]="'middle'"
+    [nzFrontPagination]="false"
+    [nzTotal]="total"
+    [nzShowTotal]="totalTemplate"
+    [nzShowQuickJumper]="true"
+    [nzShowSizeChanger]="true"
+    [nzLoading]="tableLoading"
+    [nzLoadingDelay]="2"
+    [(nzPageIndex)]="pageIndex"
+    [(nzPageSize)]="pageSize"
+    (nzPageIndexChange)="getBlogList()"
+    (nzPageSizeChange)="getBlogList()"
+  >
     <thead>
       <tr>
         <th>序号</th>
@@ -42,13 +58,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let blog of basicTable.data; let i = index">
+      <tr *ngFor="let blog of blogTable.data; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ blog.title }}</td>
         <td>{{ blog.author }}</td>
         <td>{{ blog.createtime | date: "yyyy-MM-dd HH:mm:ss" }}</td>
         <td>
-          <a (click)="viewBlog(blog.id)">查看</a>
+          <!-- <a (click)="viewBlog(blog.id)">查看</a> -->
+          <a [routerLink]="['/blog/details', blog.id]">查看</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="handleBlog(blog)">编辑</a>
           <nz-divider nzType="vertical"></nz-divider>
@@ -57,4 +74,5 @@
       </tr>
     </tbody>
   </nz-table>
+  <ng-template #totalTemplate let-total>共 {{ total }} 条</ng-template>
 </nz-card>

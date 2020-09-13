@@ -39,6 +39,7 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzCascaderModule } from 'ng-zorro-antd/cascader';
 import { NzEmptyModule } from 'ng-zorro-antd/empty';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 
 export const SHARED_ZORRO_MODULES = [
   NzButtonModule,
@@ -82,4 +83,5 @@ export const SHARED_ZORRO_MODULES = [
   NzCollapseModule,
   NzCascaderModule,
   NzEmptyModule,
+  NzDescriptionsModule,
 ];

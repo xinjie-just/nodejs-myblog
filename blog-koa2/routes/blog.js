@@ -14,6 +14,8 @@ router.prefix('/api/blog');
 router.get('/list', async (ctx, next) => {
   let author = ctx.query.author || '';
   const keyword = ctx.query.keyword || '';
+  const pageIndex = req.query.pageIndex || 0;
+  const pageSize = req.query.pageSize || 10;
   if (ctx.query.isadmin) {
     // 管理员界面
     if (!ctx.session.username) {
@@ -23,7 +25,7 @@ router.get('/list', async (ctx, next) => {
     // 强制查询自己的博客
     author = ctx.session.username;
   }
-  const listData = await getBlogList(keyword, author); // 传参数顺序不要混淆
+  const listData = await getBlogList(keyword, author, pageIndex, pageSize); // 传参数顺序不要混淆
   ctx.body = new SuccessModel(listData);
 });
 

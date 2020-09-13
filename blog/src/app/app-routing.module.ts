@@ -18,6 +18,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/blog/blog.module').then((m) => m.BlogModule),
   },
+  {
+    path: 'component',
+    loadChildren: () =>
+      import('./component/component.module').then((m) => m.ComponentModule),
+  },
+  { path: '**', redirectTo: '/index' },
 ];
 
 @NgModule({

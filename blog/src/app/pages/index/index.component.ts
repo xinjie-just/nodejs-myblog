@@ -1,11 +1,7 @@
 import { CommonResponse } from './../../shared/interface/common.d';
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from 'src/app/shared/service/blog.service';
-import {
-  Blog,
-  DeleteBlogRequestParams,
-  SearchBlogRequestParams,
-} from 'src/app/shared/interface/blog';
+import { Blog } from 'src/app/shared/interface/blog';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 
@@ -16,9 +12,14 @@ import { Router } from '@angular/router';
 })
 export class IndexComponent implements OnInit {
   value = '';
+  author = '';
 
   tableLoading = false;
   blogList: Blog[] = [];
+  total = 0;
+
+  pageIndex = 1;
+  pageSize = 10;
 
   constructor(
     private blogService: BlogService,
@@ -27,23 +28,26 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getBlogList({ title: '', author: '' });
+    this.getBlogList();
   }
 
   search() {
-    this.getBlogList({ title: this.value, author: '' });
+    this.getBlogList();
   }
 
-  getBlogList(value?: SearchBlogRequestParams) {
+  getBlogList() {
     this.tableLoading = true;
     const params = {
-      title: value.title,
-      author: value.author,
+      title: this.value,
+      author: this.author,
+      pageIndex: this.pageIndex - 1,
+      pageSize: this.pageSize,
     };
     this.blogService.getBlogList(params).subscribe(
       (res: CommonResponse<Blog[]>) => {
         if (res.code === 0) {
-          this.blogList = res.data;
+          this.total = res.data.total;
+          this.blogList = res.data.results;
         } else {
           this.msg.error(res.message);
         }

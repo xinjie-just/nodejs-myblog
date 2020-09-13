@@ -13,7 +13,9 @@ const { loginCheck } = require('../middleware/loginCheck');
 router.get('/list', (req, res, next) => {
   let author = req.query.author || '';
   const keyword = req.query.keyword || '';
-  const result = getBlogList(keyword, author); // 传参数顺序不要混淆
+  const pageIndex = req.query.pageIndex || 0;
+  const pageSize = req.query.pageSize || 10;
+  const result = getBlogList(keyword, author, pageIndex, pageSize); // 传参数顺序不要混淆
   if (req.query.isadmin) {
     // 管理员界面
     if (!req.session.username) {
@@ -26,7 +28,7 @@ router.get('/list', (req, res, next) => {
   return result.then((listData) => {
     res.json(new SuccessModel(listData));
   });
-});
+};);
 
 router.get('/detail', (req, res, next) => {
   const result = getBlogDetail(req.query.id);

@@ -2,7 +2,9 @@ const xss = require('xss');
 const { sqlHandle } = require('../db/mysql');
 
 // 获取博客列表
-const getBlogList = (keyword = '', author = '') => {
+const getBlogList = (keyword = '', author = '', pageIndex, pageSize) => {
+  let totalSql = ``;
+  let total = 0;
   let sql = `select * from blogs where 1=1 `;
   if (keyword) {
     sql += `and title like '%${keyword}%' `;
@@ -10,11 +12,22 @@ const getBlogList = (keyword = '', author = '') => {
   if (author) {
     sql += `and author = '${author}' `;
   }
-  sql += `order by createtime desc`;
-  /* return sqlHandle(sql).then((data) => {
-    return data;
-  }); */
-  return sqlHandle(sql);
+  sql += `order by createtime desc `;
+  totalSql = sql;
+  sqlHandle(totalSql).then((data) => {
+    total = data.length;
+  });
+
+  if (pageIndex && pageSize) {
+    const index = pageIndex * pageSize;
+    sql += `limit ${index}, ${pageSize}`;
+  }
+  return sqlHandle(sql).then((data) => {
+    return {
+      total,
+      results: data,
+    };
+  });
 };
 
 // 获取博客详情
