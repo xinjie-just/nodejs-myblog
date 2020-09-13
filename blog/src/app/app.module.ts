@@ -17,11 +17,12 @@ import { SHARED_ZORRO_MODULES } from './shared/shared-zorro.module';
 import { UserComponent } from './component/user/user.component';
 import { ListComponent } from './pages/blog/list/list.component';
 import { DetailsComponent } from './pages/blog/details/details.component';
+import { AddUpdateComponent } from './pages/blog/add-update/add-update.component';
 
 registerLocaleData(zh);
 
 @NgModule({
-  declarations: [AppComponent, UserComponent, ListComponent, DetailsComponent],
+  declarations: [AppComponent, UserComponent, ListComponent, DetailsComponent, AddUpdateComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -7,6 +7,13 @@ export interface Blog {
   status?: number;
 }
 
+export interface AddUpdateBlogRequestParams {
+  id?: number;
+  author?: string;
+  title: string;
+  content: string;
+}
+
 export interface SearchBlogRequestParams {
   author?: string;
   title?: string;

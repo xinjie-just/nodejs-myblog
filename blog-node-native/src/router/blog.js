@@ -54,7 +54,9 @@ const handleBlogRouter = (req, res) => {
       // 未登录
       loginCheckResult;
     }
-    req.body.author = req.session.username;
+    if (req.session.username) {
+      req.body.author = req.session.username;
+    }
     const result = createBlog(req.body);
     return result.then((value) => {
       return new SuccessModel(value);

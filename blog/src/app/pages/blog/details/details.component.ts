@@ -2,7 +2,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CommonResponse } from './../../../shared/interface/common.d';
 import { BlogService } from 'src/app/shared/service/blog.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Blog } from 'src/app/shared/interface/blog';
 
 @Component({
@@ -16,7 +16,8 @@ export class DetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
-    private msg: NzMessageService
+    private msg: NzMessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +26,12 @@ export class DetailsComponent implements OnInit {
       if (res.code === 0) {
         this.blog = res.data;
       }
+    });
+  }
+
+  goListPage() {
+    this.router.navigate(['../../'], {
+      relativeTo: this.route,
     });
   }
 }

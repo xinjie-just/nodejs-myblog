@@ -1,4 +1,4 @@
-<nz-card nzTitle="{{ blog.title }}">
+<nz-card nzTitle="{{ blog.title }}" [nzExtra]="extraTemplate">
   <div class="ext-info">
     <span>{{ blog.author }}</span>
     <span>{{ blog.createtime | date: "yyyy-MM-dd HH-mm-ss" }}</span>
@@ -6,3 +6,6 @@
   <nz-divider></nz-divider>
   <p>{{ blog.content }}</p>
 </nz-card>
+<ng-template #extraTemplate>
+  <a (click)="goListPage()">返回</a>
+</ng-template>

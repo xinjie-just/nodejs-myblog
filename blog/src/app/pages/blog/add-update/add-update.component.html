@@ -1,0 +1,49 @@
+<form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submit()">
+  <nz-form-item>
+    <nz-form-label nzSpan="4" required>博客标题</nz-form-label>
+    <nz-form-control nzSpan="20" [nzErrorTip]="'博客标题是必填项'">
+      <input
+        type="text"
+        nz-input
+        formControlName="title"
+        placeholder="请输入博客标题"
+      />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzSpan="4" required>博客内容</nz-form-label>
+    <nz-form-control nzSpan="20" [nzErrorTip]="'博客内容是必填项'">
+      <textarea
+        type="text"
+        nz-input
+        formControlName="content"
+        placeholder="请输入博客内容"
+        [nzAutosize]="{ minRows: 3, maxRows: 7 }"
+      ></textarea>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <button
+      nz-col
+      nzOffset="4"
+      nz-button
+      [nzType]="'primary'"
+      type="submit"
+      [disabled]="form.invalid"
+      [nzLoading]="loading"
+    >
+      确认
+    </button>
+    <button
+      nz-col
+      nzOffset="1"
+      nz-button
+      [nzType]="'default'"
+      type="button"
+      (click)="cancel()"
+      [nzLoading]="loading"
+    >
+      取消
+    </button>
+  </nz-form-item>
+</form>

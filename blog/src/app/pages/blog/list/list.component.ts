@@ -1,3 +1,4 @@
+import { AddUpdateComponent } from './../add-update/add-update.component';
 import { Component, OnInit } from '@angular/core';
 import {
   Blog,
@@ -95,7 +96,24 @@ export class ListComponent implements OnInit {
     );
   }
 
-  view(id: number) {
+  viewBlog(id: number) {
     this.router.navigateByUrl(`/blog/details/${id}`);
+  }
+
+  handleBlog(blog = {}) {
+    const handleModal = this.modal.create({
+      nzTitle: Object.keys(blog).length ? '修改博客' : '新建博客',
+      nzContent: AddUpdateComponent,
+      nzComponentParams: {
+        blog: Object.keys(blog).length ? blog : {},
+      },
+      nzFooter: null,
+    });
+
+    handleModal.afterClose.subscribe((result) => {
+      if (result && result.data === 'success') {
+        this.getBlogList({ title: this.value });
+      }
+    });
   }
 }
