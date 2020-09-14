@@ -125,24 +125,20 @@
 数据库配置如下：
 
 ```
-
 MYSQL_CONF = {
-host: 'localhost',
-user: 'root',
-password: 'Lxj18227752005',
-port: 3306,
-database: 'myblog',
+  host: 'localhost',
+  user: 'root',
+  password: 'Lxj18227752005',
+  port: 3306,
+  database: 'myblog'
 };
-
 ```
 
 数据库里面新增一个用户(初始指定一个用户，如：zhangsan/123）
 
 ```
-
 use myblog;
 inseart into users (username, password, realname) values ("zhangshan", "123", "张三");
-
 ```
 
 ## 三、启动后端项目
@@ -156,10 +152,8 @@ inseart into users (username, password, realname) values ("zhangshan", "123", "�
 重新打开一个终端，进入 blog-node-native，安装依赖。
 
 ```
-
 cd blog-node-native
 npm install
-
 ```
 
 3. 修改启动地址
@@ -177,10 +171,8 @@ npm install
 进入 blog 目录，安装依赖。
 
 ```
-
 cd blog
 npm install
-
 ```
 
 2. 代理到后段服务器
@@ -188,15 +180,13 @@ npm install
 在根目录下添加文件 `proxy.conf.json` 写如如下代码：
 
 ```
-
 {
-"/api": {
-"target": "http://localhost:8000/api",
-"secure": false,
-"logLevel": "debug"
+  "/api": {
+  "target": "http://localhost:8000/api",
+  "secure": false,
+  "logLevel": "debug"
+  }
 }
-}
-
 ```
 
 以上代码表示：
@@ -208,7 +198,3 @@ npm install
 3. 启动
 
 `npm run start` 启动，然后工程将运行在 localhost：4200 上。在浏览器中输入 `http://localhost:4200` 查看项目，登录后可以管理博客（增删改查）。
-
-```
-
-```
