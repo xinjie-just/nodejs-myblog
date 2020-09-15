@@ -19,12 +19,13 @@ const handleUserRouter = (req, res) => {
     const result = login(username, password);
     return result
       .then((value) => {
-        if (value.username) {
-          req.session.username = value.username;
-          req.session.realname = value.realname;
+        const data = value.results;
+        if (data.username) {
+          req.session.username = data.username;
+          req.session.realname = data.realname;
           // 将 session 同步到 redis 中
           set(req.sessionId, req.session);
-          // console.log('session...', value.username, value.realname);
+          // console.log('session...', data.username, data.realname);
           return new SuccessModel('登录成功！');
         } else {
           return new ErrorModel('用户名或密码错误！');

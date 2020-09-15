@@ -21,7 +21,10 @@ export class AppComponent implements OnInit {
       .pipe(filter((evt) => evt instanceof NavigationEnd))
       .subscribe((res: NavigationEnd) => {
         this.routerUrl = res.url;
-        if (this.routerUrl.startsWith('/index')) {
+        if (
+          this.routerUrl.startsWith('/index') ||
+          !this.routerUrl.includes('/blog')
+        ) {
           this.templateType = 'blank';
         } else {
           this.templateType = 'sidebar';

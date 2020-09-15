@@ -8,9 +8,10 @@ router.post('/login', function (req, res, next) {
   const result = login(username, password);
   return result
     .then((value) => {
-      if (value.username) {
-        req.session.username = value.username;
-        req.session.realname = value.realname;
+      const data = value.results;
+      if (data.username) {
+        req.session.username = data.username;
+        req.session.realname = data.realname;
         res.json(new SuccessModel('登录成功！'));
       } else {
         res.json(new ErrorModel('用户名或密码错误！'));

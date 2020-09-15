@@ -7,11 +7,11 @@ router.prefix('/api/user');
 router.post('/login', async function (ctx, next) {
   const { username, password } = ctx.request.body;
   const value = await login(username, password);
-
   try {
-    if (value.username) {
-      ctx.session.username = value.username;
-      ctx.session.realname = value.realname;
+    const data = value.results;
+    if (data.username) {
+      ctx.session.username = data.username;
+      ctx.session.realname = data.realname;
       ctx.body = new SuccessModel('登录成功！');
     } else {
       ctx.body = new ErrorModel('用户名或密码错误！');
